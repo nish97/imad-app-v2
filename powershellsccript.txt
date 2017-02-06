@@ -1,0 +1,9 @@
+npm install http-server -g
+npm install
+cp ~/"FROM"/ "FILE NAME WITH EXTENSION" ./
+rm "FILENAME"
+node server.js
+git clone "URL"
+git add  "ADDRESS"
+git commit -m "TITLE"
+git  push origin master
