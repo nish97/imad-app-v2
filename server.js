@@ -112,9 +112,19 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/:ArticleName', function (req, res) {
-  var ArticleName=req.params.ArticleName;
-  res.send(createTemplate(articles[ArticleName]));
+app.get('/articles/:ArticleName', function (req, res) {
+  pool.query("SELECT * FROM article WHERE title'"+ req.params.ArticleName+"'",function(err, result){
+      if(err){
+      res.status(500).send(err.toString());
+      } else{
+      if(result.rows.length ===0){
+          res.status(404).send(err.toString());
+      } else{
+      var ArticleData = result.rows[0];
+      res.send(createTemplate(ArticleData));
+      }
+    }
+  });
 });
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
